@@ -1,0 +1,5 @@
+<%= form_with model: [ talk, Topic.new ] do |form| %>
+  Your topic:<br>
+  <%= form.text_area :content, size: "20x5" %>
+  <%= form.submit %>
+<% end %>

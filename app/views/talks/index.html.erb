@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Talks</h1>
+
+<div id="talks">
+  <% @talks.each do |talk| %>
+    <%= render talk %>
+    <p>
+      <%= link_to "Show this talk", talk %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New talk", new_talk_path %>

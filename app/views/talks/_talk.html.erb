@@ -1,0 +1,16 @@
+<div id="<%= dom_id talk %>">
+  <p>
+    <strong>Host:</strong>
+    <%= talk.host %>
+  </p>
+
+  <p>
+   <strong><%= pluralize talk.topics.count, "topic" %></strong>
+  </p>
+
+  <p>
+    <strong>Duration:</strong>
+    <%= talk.duration %>
+  </p>
+
+</div>

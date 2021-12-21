@@ -1,0 +1,13 @@
+<%= turbo_stream_from @talk %>
+
+<p style="color: green"><%= notice %></p>
+
+<%= render @talk %>
+<%= render "talks/topics", topic: @topic %>
+
+<div>
+  <%= link_to "Edit this talk", edit_talk_path(@talk) %> |
+  <%= link_to "Back to talks", talks_path %>
+
+  <%= button_to "Destroy this talk", @talk, method: :delete %>
+</div>
