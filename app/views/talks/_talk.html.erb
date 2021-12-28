@@ -1,12 +1,13 @@
-<div id="<%= dom_id talk %>">
+<div id="<%= dom_id talk %>" class="bg-sky-800 text-white p-2">
   <p>
     <strong>Host:</strong>
     <%= talk.host %>
   </p>
 
-  <p>
-   <strong>Number of <%= pluralize talk.topics.count, "topic" %></strong>
-  </p>
+  <div>
+    <p>Topics created:</p>
+    <span id="topics_count"><%= talk.topics.count %></span>
+  </div>
 
   <p>
     <strong>Duration:</strong>

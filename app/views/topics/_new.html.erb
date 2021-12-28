@@ -1,5 +1,12 @@
-<%= form_with model: [ talk, Topic.new ] do |form| %>
-  Your topic:<br>
-  <%= form.text_area :content, size: "20x5" %>
-  <%= form.submit %>
+<%= form_with model: [ talk, Topic.new ], html: { autocomplete: "off", class: "flex flex-col w-full" } do |form| %>
+  <h2 class="italic text-6xl lg:text-2xl font-bold">Add topic</h2>
+  <% if !@topic.errors.any? %>
+    <%= form.text_area :content, size: "20x5", class: "p-2 w-full" %>
+  <% else %>
+    <%= form.text_area :content, size: "20x5", class: "p-2 w-full border-2 border-red-700 border-solid" %>
+  <% end %>
+  <%= form.submit "ADD", class: "font-bold text-white bg-green-600 text-center my-2 py-2 text-xl cursor-pointer" %>
 <% end %>
+
+
+

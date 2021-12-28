@@ -1,6 +1,5 @@
 class TalksController < ApplicationController
-  before_action :set_talk, only: %i[ show edit update destroy ]
-
+  
   # GET /talks or /talks.json
   def index
     @talks = Talk.all
@@ -8,6 +7,8 @@ class TalksController < ApplicationController
 
   # GET /talks/1 or /talks/1.json
   def show
+    @topics = @talk.topics.order(created_at: :desc)
+    @topic = Topic.new
   end
 
   # GET /talks/new
@@ -59,9 +60,7 @@ class TalksController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_talk
-      @talk = Talk.find(params[:id])
-    end
+
 
     # Only allow a list of trusted parameters through.
     def talk_params

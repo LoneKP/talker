@@ -1,9 +1,18 @@
 <%= turbo_stream_from @talk %>
+<%= turbo_stream_from "topic_count_stream" %>
 
 <p style="color: green"><%= notice %></p>
 
-<%= render @talk %>
-<%= render "talks/topics", topic: @topic %>
+<div class="flex flex-row justify-between gap-12 mt-8">
+  <div class="w-full">
+    <h1 class="bg-sky-800 text-white text-5xl font-bold p-3 px-2 uppercase">What do you want to talk about?</h1>
+    <%= render "talks/topics", talk: @talk %>
+  </div>
+  <div>
+    <%= render @talk %>
+  </div>  
+</div>
+
 
 <div>
   <%= link_to "Edit this talk", edit_talk_path(@talk) %> |

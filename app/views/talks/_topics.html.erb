@@ -1,9 +1,10 @@
-<h2>Topics</h2>
-
-<div id="topics">
-<%# Expands to render partial: "topics/topic", collection: talk.topics %>
-  <%= render @talk.topics %>
+<div class="mt-4">
+  <%= render "topics/new", talk: talk %>
 </div>
 
-<%= render "topics/new", talk: @talk %>
+<div id="topics" class="my-2 gap-2 flex-col flex">
+<%= render partial: "topics/topic", collection: @topics %>
+</div>
+
+
 
