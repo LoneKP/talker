@@ -14,7 +14,8 @@ class TopicsController < ApplicationController
     end
   end 
 
-  def index
+  def upvote
+    Topic.find(params[:topic_id]).votes.create!
   end
 
   private 
