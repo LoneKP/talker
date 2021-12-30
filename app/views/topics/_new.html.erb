@@ -1,4 +1,4 @@
-<%= form_with model: [ talk, Topic.new ], html: { autocomplete: "off", class: "flex flex-col w-full" } do |form| %>
+<%= form_with model: [ talk, Topic.new ], data: { turbo: false }, html: { autocomplete: "off", class: "flex flex-col w-full" } do |form| %>
   <h2 class="italic text-6xl lg:text-2xl font-bold">Add topic</h2>
   <% if !@topic.errors.any? %>
     <%= form.text_area :content, size: "20x5", class: "p-2 w-full" %>
