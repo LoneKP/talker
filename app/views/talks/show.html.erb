@@ -1,23 +1,13 @@
-<%= turbo_stream_from @talk %>
+<%= turbo_stream_from "topics_stream" %>
 <%= turbo_stream_from "topic_count_stream" %>
-
-<div class="flex flex-row justify-between gap-12 mt-8">
-  <div class="w-full">
-    <h1 class="bg-sky-800 text-white text-5xl font-bold p-3 px-2 uppercase">What do you want to talk about?</h1>
-    <div class="mt-4">
-      <%= render "topics/new", talk: @talk %>
-    </div>
-    <%= render "talks/topics", talk: @talk %>
-  </div>
-  <div>
-    <%= render @talk %>
-  </div>  
-</div>
+<%= turbo_stream_from "state_stream" %>
 
 
-<div>
-  <%= link_to "Edit this talk", edit_talk_path(@talk) %> |
-  <%= link_to "Back to talks", talks_path %>
+  <%= button_to "State 1: Topics", talk_change_state_path(@talk, state: 1) %>
+  <%= button_to "State 2: Voting", talk_change_state_path(@talk, state: 2) %>
+  <%= button_to "State 3: Talking", talk_change_state_path(@talk, state: 3) %>
+  <%= button_to "State 4: Recap", talk_change_state_path(@talk, state: 4) %>
 
-  <%= button_to "Destroy this talk", @talk, method: :delete %>
+<div id=<%= dom_id(@talk) %>>
+  <%= render "talks/partial_show", talk: @talk, topics: @topics %>
 </div>

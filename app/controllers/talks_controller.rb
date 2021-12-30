@@ -7,7 +7,7 @@ class TalksController < ApplicationController
 
   # GET /talks/1 or /talks/1.json
   def show
-    @topics = @talk.topics.order(created_at: :desc)
+    @topics = @talk.ordered_topics
     @topic = Topic.new
   end
 
@@ -26,7 +26,7 @@ class TalksController < ApplicationController
 
     respond_to do |format|
       if @talk.save
-        format.html { redirect_to talk_url(@talk), notice: "Talk was successfully created." }
+        format.turbo_stream { redirect_to talk_url(@talk), notice: "Talk was successfully created." }
         format.json { render :show, status: :created, location: @talk }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -58,6 +58,12 @@ class TalksController < ApplicationController
     end
   end
 
+  def change_state
+    talk = Talk.find(params[:talk_id])
+    talk.state = params[:state]
+    talk.save
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_talk
@@ -66,6 +72,6 @@ class TalksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def talk_params
-      params.require(:talk).permit(:duration, :host)
+      params.require(:talk).permit(:duration, :host, :state)
     end
 end

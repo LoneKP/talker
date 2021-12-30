@@ -13,6 +13,17 @@
     <strong>Duration:</strong>
     <%= talk.duration %>
   </p>
+  <p>
+    <strong>State:</strong>
+    <%= talk.state %>
+  </p>
 
-  <%= link_to "Start voting", talk_votes_path(talk), data: { turbolinks: false } %>
+  <% if talk.state == 1 %>
+  <%= button_to "Go to voting", talk_change_state_path(talk, state: 2) %>
+  <% elsif talk.state == 2 %>
+  <%= button_to "Go to talking", talk_change_state_path(talk, state: 3) %>
+  <% elsif talk.state == 3 %>
+  <%= button_to "Go to recap", talk_change_state_path(talk, state: 4) %>
+  <% else %>
+  <% end %>
 </div>

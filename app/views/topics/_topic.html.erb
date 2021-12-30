@@ -1,16 +1,17 @@
 <%= turbo_stream_from "vote_count_stream" %>
 
-<% if local_assigns[:votable] == true %>
+<% if talk.state == 2 %>
 
-<%= button_to talk_topic_upvote_path(@talk, topic), id: dom_id(topic), method: :post, class: "w-full bg-white p-6 w-full flex flex-row justify-between" do %>
+<%= button_to talk_topic_upvote_path(talk, topic), id: dom_id(topic), method: :post, class: "w-full bg-white p-6 flex flex-row justify-between" do %>
   <p><%= topic.content %></p>
   <p id="<%= dom_id(topic, :votes_count) %>"><%= topic.votes.size %> </p>
 <% end %>
 
 <% else %>
 
-<div id="<%= dom_id(topic) %>" class="bg-white p-6">
+<div id="<%= dom_id(topic) %>" class="w-full bg-white p-6 flex flex-row justify-between">
   <%= topic.content %>
+   <p id="<%= dom_id(topic, :votes_count) %>"><%= topic.votes.size %> </p>
 </div>
 
 <% end %>

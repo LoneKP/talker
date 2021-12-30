@@ -3,7 +3,7 @@ class TopicsController < ApplicationController
 
   def create
     @topic = @talk.topics.new topic_params
-    @topics = @talk.topics.order(created_at: :desc)
+    @topics = @talk.ordered_topics
     if @topic.save
       redirect_to @talk
     else
