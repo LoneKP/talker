@@ -26,7 +26,7 @@ class TalksController < ApplicationController
 
     respond_to do |format|
       if @talk.save
-        format.turbo_stream { redirect_to talk_url(@talk), notice: "Talk was successfully created." }
+        format.html { redirect_to talk_url(@talk), notice: "Talk was successfully created." }
         format.json { render :show, status: :created, location: @talk }
       else
         format.html { render :new, status: :unprocessable_entity }
