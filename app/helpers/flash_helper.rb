@@ -7,4 +7,13 @@ module FlashHelper
       "bg-sky-700 text-white"
     end
   end
+
+  def icons_for_flash(flash_key)
+    case flash_key.to_sym
+    when :error
+      "error"
+    else
+      "done"
+    end
+  end
 end

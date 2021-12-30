@@ -1,7 +1,7 @@
 <% flash.each do |key, value| %>
-  <div data-controller="flash" class="fade-out <%= classes_for_flash(key) %> w-full sticky flex justify-between bottom-0 text-md p-2">
+  <div data-controller="flash" class="fade-out <%= classes_for_flash(key) %> w-full fixed flex justify-between bottom-0 text-md p-2">
     <div class="flex gap-2">
-      <span class="material-icons">error</span>
+      <span class="material-icons"><%= icons_for_flash(key) %></span>
       <%= value %>
     </div>
     <button type="button" data-action="flash#dismiss">
