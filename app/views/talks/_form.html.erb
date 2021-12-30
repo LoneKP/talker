@@ -1,4 +1,4 @@
-<%= form_with model: talk do |form| %>
+<%= form_with model: talk, data: { turbo: false } do |form| %>
   <% if talk.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(talk.errors.count, "error") %> prohibited this talk from being saved:</h2>
