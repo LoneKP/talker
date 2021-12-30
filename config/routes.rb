@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
+  get "/talks/:id/topics", to: redirect("/talks/%{id}")
   
   resources :talks do
-    resources :topics, only: :create do
+    resources :topics, only: [:create, :index] do
       post :upvote
     end
     post :change_state
@@ -9,5 +10,5 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root "talks#index"
+  root "talks#new"
 end
