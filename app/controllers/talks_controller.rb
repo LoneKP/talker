@@ -1,10 +1,6 @@
 class TalksController < ApplicationController
   before_action :set_talk, only: %i[ show edit update destroy ]
-  # GET /talks or /talks.json
-  def index
-    @talks = Talk.all
-  end
-
+ 
   # GET /talks/1 or /talks/1.json
   def show
     @topics = @talk.ordered_topics
@@ -37,14 +33,11 @@ class TalksController < ApplicationController
 
   # PATCH/PUT /talks/1 or /talks/1.json
   def update
-    respond_to do |format|
-      if @talk.update(talk_params)
-        format.html { redirect_to talk_url(@talk), notice: "Talk was successfully updated." }
-        format.json { render :show, status: :ok, location: @talk }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @talk.errors, status: :unprocessable_entity }
-      end
+    if @talk.update(talk_params)
+      #Page change is streamed from talk.rb
+    else
+      render "talks/show", status: :unprocessable_entity
+      flash.now[:error] = "something happened"
     end
   end
 
@@ -56,12 +49,6 @@ class TalksController < ApplicationController
       format.html { redirect_to talks_url, notice: "Talk was successfully destroyed." }
       format.json { head :no_content }
     end
-  end
-
-  def change_state
-    talk = Talk.find(params[:talk_id])
-    talk.state = params[:state]
-    talk.save
   end
 
   private

@@ -1,0 +1,4 @@
+<%= form_with model: talk, method: :patch do |form| %>
+  <%= form.hidden_field :state, :value => state %>
+  <%= form.submit text, class: "cursor-pointer" %>
+<% end %>

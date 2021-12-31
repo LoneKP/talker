@@ -19,11 +19,10 @@
   </p>
 
   <% if talk.state == 1 %>
-  <%= button_to "Go to voting", talk_change_state_path(talk, state: 2) %>
+    <%= render "shared/nav_form", talk: talk, state: 2, text: "Go to voting" %>
   <% elsif talk.state == 2 %>
-  <%= button_to "Go to talking", talk_change_state_path(talk, state: 3) %>
+    <%= render "shared/nav_form", talk: talk, state: 3, text: "Go to talking" %>
   <% elsif talk.state == 3 %>
-  <%= button_to "Go to recap", talk_change_state_path(talk, state: 4) %>
-  <% else %>
+   <%= render "shared/nav_form", talk: talk, state: 4, text: "Go to recap" %>
   <% end %>
 </div>

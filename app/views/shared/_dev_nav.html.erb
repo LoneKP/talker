@@ -1,4 +1,4 @@
-<%= button_to "State 1: Topics", talk_change_state_path(@talk, state: 1) %>
-<%= button_to "State 2: Voting", talk_change_state_path(@talk, state: 2) %>
-<%= button_to "State 3: Talking", talk_change_state_path(@talk, state: 3) %>
-<%= button_to "State 4: Recap", talk_change_state_path(@talk, state: 4) %>
+<%= render "shared/nav_form", talk: @talk, state: 1, text: "State 1: Topics" %>
+<%= render "shared/nav_form", talk: @talk, state: 2, text: "State 2: Voting" %>
+<%= render "shared/nav_form", talk: @talk, state: 3, text: "State 3: Talking" %>
+<%= render "shared/nav_form", talk: @talk, state: 4, text: "State 4: Recap" %>
