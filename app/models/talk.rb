@@ -1,6 +1,7 @@
 class Talk < ApplicationRecord
-  validates_presence_of :host
   has_many :topics, dependent: :destroy
+
+  validates :host, presence: { message: "Don't be shy! Write your name to let the participants know who you are."}
 
   after_commit :broadcast_state, if: :saved_change_to_state?
 

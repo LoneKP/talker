@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   get "/talks/:id/topics", to: redirect("/talks/%{id}")
+  get "/talks", to: redirect("/talks/new")
   
-  resources :talks, except: [:index] do
+  resources :talks, except: [:index, :edit] do
     resources :topics, only: [:create, :index] do
       post :upvote
     end

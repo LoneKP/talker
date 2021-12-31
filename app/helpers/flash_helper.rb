@@ -4,7 +4,7 @@ module FlashHelper
     when :error
       "bg-red-700 text-white"
     else
-      "bg-sky-700 text-white"
+      "bg-sky-700 text-white fade-out"
     end
   end
 

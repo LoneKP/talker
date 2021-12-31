@@ -12,10 +12,6 @@ class TalksController < ApplicationController
     @talk = Talk.new
   end
 
-  # GET /talks/1/edit
-  def edit
-  end
-
   # POST /talks or /talks.json
   def create
     @talk = Talk.new(talk_params)
@@ -23,10 +19,9 @@ class TalksController < ApplicationController
     respond_to do |format|
       if @talk.save
         format.html { redirect_to talk_url(@talk), notice: "Talk was successfully created." }
-        format.json { render :show, status: :created, location: @talk }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @talk.errors, status: :unprocessable_entity }
+        flash.now[:error] = @talk.errors.messages.first.second[0]
       end
     end
   end
