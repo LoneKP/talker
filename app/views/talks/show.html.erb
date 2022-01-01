@@ -3,7 +3,6 @@
 <%= turbo_stream_from "state_stream" %>
 
 <%= render "shared/dev_nav" if Rails.env.development? %>
-
 <div id=<%= dom_id(@talk) %>>
   <%= render "talks/partial_show", talk: @talk, topics: @topics %>
 </div>

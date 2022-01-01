@@ -1,0 +1,29 @@
+<div class="bg-white mb-8 p-8 leading-loose">
+  <p class="font-bold">All you have to do is</p>
+  <p>1. Share the link with participants</p>
+  <p>2. Come up with topics together</p>
+  <p>3. Vote for the most relevant topics</p>
+  <p>4. Talk about the most relevant topics</p>
+</div>
+
+<div class="flex flex-row gap-2">
+  <div data-controller="clipboard" data-action="click->clipboard#copy click->clipboard#copied" class="bg-white lg:py-4 md:py-8 px-8 my-shadow-lg w-full">
+      <div class="transition duration-200 ease-in-out transform hover:bg-sky-800 active:bg-sky-900 md:py-4 lg:py-0 bg-sky-700 tooltip cursor-pointer w-full">
+          <div class="flex justify-center items-center">
+          <svg class="lg:mr-4 lg:h-8 lg:w-8 md:mr-8 md:h-16 md:w-16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M3.96 11.38C4.24 9.91 5.62 8.9 7.12 8.9h2.93c.52 0 .95-.43.95-.95S10.57 7 10.05 7H7.22c-2.61 0-4.94 1.91-5.19 4.51C1.74 14.49 4.08 17 7 17h3.05c.52 0 .95-.43.95-.95s-.43-.95-.95-.95H7c-1.91 0-3.42-1.74-3.04-3.72zM9 13h6c.55 0 1-.45 1-1s-.45-1-1-1H9c-.55 0-1 .45-1 1s.45 1 1 1zm7.78-6h-2.83c-.52 0-.95.43-.95.95s.43.95.95.95h2.93c1.5 0 2.88 1.01 3.16 2.48.38 1.98-1.13 3.72-3.04 3.72h-3.05c-.52 0-.95.43-.95.95s.43.95.95.95H17c2.92 0 5.26-2.51 4.98-5.49-.25-2.6-2.59-4.51-5.2-4.51z"></path></svg>
+          <p data-clipboard-target="copiedElement" class=" text-white uppercase md:text-6xl lg:text-xl font-medium py-2 text-center">Share talk link</p>
+          </div>
+      </div>
+  </div>
+
+  <div class="bg-white lg:py-4 md:py-8 px-8 my-shadow-lg w-full">
+    <%= form_with model: talk, method: :patch do |form| %>
+      <%= form.hidden_field :state, :value => 2 %>
+      <%= button_tag "Start session", class: "flex justify-center items-center transition duration-200 ease-in-out transform hover:bg-emerald-500 active:bg-emerald-600 bg-emerald-400 cursor-pointer text-white w-full" do %>
+            <svg class="lg:mr-4 lg:h-8 lg:w-8 md:mr-8 md:h-16 md:w-16" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" width="24px" fill="#FFFFFF" viewBox="0 0 24 24"><g><rect fill="none" height="24" width="24"/></g><g><g><g><path d="M15,1H9v2h6V1z M11,14h2V8h-2V14z M19.03,7.39l1.42-1.42c-0.43-0.51-0.9-0.99-1.41-1.41l-1.42,1.42 C16.07,4.74,14.12,4,12,4c-4.97,0-9,4.03-9,9s4.02,9,9,9s9-4.03,9-9C21,10.88,20.26,8.93,19.03,7.39z M12,20c-3.87,0-7-3.13-7-7 s3.13-7,7-7s7,3.13,7,7S15.87,20,12,20z"/></g></g></g></svg>
+            <p class="uppercase text-xl font-medium py-2 text-center">Start session</p>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+

@@ -1,26 +1,30 @@
 <div id=<%= dom_id(talk) %>>
   <div class="flex flex-row justify-between gap-12 mt-8">
     <div class="w-full" >
-      <h1 class="bg-sky-800 text-white text-5xl font-bold p-3 px-2 uppercase">
+      <h1 class="bg-sky-700 text-white text-5xl font-bold p-3 px-2 uppercase">
         <% if talk.state == 1 %>
-        What do you want to talk about?
+        Hi <%= talk.host %>! Ready to have a great talk?
         <% elsif talk.state == 2 %>
-        Vote on the topics you want the group to discuss
+        Come up with some topics for the talk!
         <% elsif talk.state == 3 %>
-        Now it's time to discuss
+        Vote on the topics you think are best
         <% elsif talk.state == 4 %>
+        Now it's time to talk!
+        <% elsif talk.state == 5 %>
         Here's a recap of what you did
         <% end %>
       </h1>
       <div class="mt-4">
       <% if talk.state == 1 %>
+        <%= render "talks/intro", talk: talk %>
+      <% elsif talk.state == 2 %>
         <%= render "topics/new", talk: talk %>
-      <% elsif talk.state == 2 %>  
-        <%= render "votes/show" %>
       <% elsif talk.state == 3 %>  
-        <%= render "talks/talking" %>
+        <%= render "votes/show" %>
       <% elsif talk.state == 4 %>  
-        <%= render "talks/recap" %>
+        <%= render "talks/talking" %>
+      <% elsif talk.state == 5 %>  
+        <%= render "talks/recap", talk: talk %>
       <% end %>
       </div>
       <%= render "talks/topics", talk: talk, topics: topics %>

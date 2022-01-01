@@ -8,7 +8,7 @@
         <p class="opacity-50 text-black italic font-semibold">Let the participants know who you are</p>
       </div>
 
-      <%= form.text_field :host, class: "#{@talk.errors.any? ? "border-2 border-red-700 border-solid" : "" }focus:outline-none border-solid border-2 border-black h-12 italic font-bold px-4 w-full", autocomplete: "off" %>
+      <%= form.text_field :host, class: "#{@talk&.errors&.any? ? "border-2 border-red-700 border-solid" : "" }focus:outline-none border-solid border-2 border-black h-12 italic font-bold px-4 w-full", autocomplete: "off" %>
 
   </div>
 
