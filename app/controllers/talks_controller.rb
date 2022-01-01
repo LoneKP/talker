@@ -1,5 +1,6 @@
 class TalksController < ApplicationController
   before_action :set_talk, only: %i[ show edit update destroy ]
+  skip_before_action :verify_authenticity_token
  
   # GET /talks/1 or /talks/1.json
   def show
