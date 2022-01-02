@@ -1,5 +1,5 @@
 class AddDefaultValueToDuration < ActiveRecord::Migration[7.0]
   def change
-    change_column :talks, :duration, :integer, :default => 30
+    change_column_default :talks, :duration, from: nil, to: 30
   end
 end

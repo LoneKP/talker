@@ -13,9 +13,10 @@
 ActiveRecord::Schema.define(version: 2021_12_29_121325) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "talks", force: :cascade do |t|
+  create_table "talks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "duration", default: 30
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -23,16 +24,16 @@ ActiveRecord::Schema.define(version: 2021_12_29_121325) do
     t.integer "state", default: 1
   end
 
-  create_table "topics", force: :cascade do |t|
-    t.bigint "talk_id", null: false
+  create_table "topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "talk_id", null: false
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["talk_id"], name: "index_topics_on_talk_id"
   end
 
-  create_table "votes", force: :cascade do |t|
-    t.bigint "topic_id", null: false
+  create_table "votes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "topic_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["topic_id"], name: "index_votes_on_topic_id"
