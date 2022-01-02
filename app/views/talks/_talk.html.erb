@@ -6,7 +6,18 @@
           <p class="text-6xl leading-none"><span id="topics_count"><%= talk.topics.count %></span></p>
         </div>
         <div class="p-4 text-center text-sm bg-sky-700 opacity-50">
-          <p>Keep them coming!</p>
+          <% if talk.state < 3 %>
+            <p>Keep them coming!</p>
+          <% end %>
+          <% if talk.state == 3 %>
+            <p>Time to vote!</p>
+          <% end %>
+          <% if talk.state == 4 %>
+            <p>You're doing great!</p>
+          <% end %>
+          <% if talk.state == 5 %>
+            <p>Well done!</p>
+          <% end %>
         </div>
       </div>
 

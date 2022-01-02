@@ -8,6 +8,9 @@ class TalksController < ApplicationController
     @topic = Topic.new
   end
 
+  def index
+  end
+
   # GET /talks/new
   def new
     @talk = Talk.new
