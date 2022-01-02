@@ -22,7 +22,7 @@ class TalksController < ApplicationController
 
     respond_to do |format|
       if @talk.save
-        format.html { redirect_to talk_url(@talk), notice: "Talk was successfully created." }
+        format.html { redirect_to talk_url(@talk), notice: "Wonderful. Let's get started!" }
       else
         format.html { render :new, status: :unprocessable_entity }
         flash.now[:error] = @talk.errors.messages.first.second[0]
