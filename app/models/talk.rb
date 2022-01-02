@@ -11,7 +11,7 @@ class Talk < ApplicationRecord
   end
 
   def ordered_topics
-    if state < 3
+    if state < 4
       topics_by_created_at
     else
       topics_by_votes
