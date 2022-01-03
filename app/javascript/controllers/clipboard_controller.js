@@ -5,7 +5,6 @@ export default class extends Controller {
 
   copy() {
     navigator.clipboard.writeText(window.location.href)
-    console.log("heey")
   }
 
   copiedFromButton() {
@@ -15,7 +14,7 @@ export default class extends Controller {
     this.copiedButtonElementTarget.innerText = "Share talk link", 2000
     );
   }
-  
+
   copiedFromText() {
     this.copiedTextElementTarget.innerText = "1. Link copied!"
 
