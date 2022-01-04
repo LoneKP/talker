@@ -6,7 +6,7 @@ class Talk < ApplicationRecord
   after_commit :broadcast_state, if: :saved_change_to_state?
 
   def broadcast_state
-    broadcast_replace_to "state_stream", target: ActionView::RecordIdentifier.dom_id(self), partial: "talks/partial_show", 
+    broadcast_replace_later_to "state_stream", target: ActionView::RecordIdentifier.dom_id(self), partial: "talks/partial_show", 
     locals: { talk: self, topics: self.ordered_topics } 
   end
 
