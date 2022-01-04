@@ -7,7 +7,7 @@ class Talk < ApplicationRecord
 
   def broadcast_state
     broadcast_replace_later_to "state_stream", target: ActionView::RecordIdentifier.dom_id(self), partial: "talks/partial_show", 
-    locals: { talk: self, topics: self.ordered_topics } 
+    locals: { talk: self, topics: self.ordered_topics.to_a } 
   end
 
   def ordered_topics
@@ -25,5 +25,4 @@ class Talk < ApplicationRecord
   def topics_by_votes
     topics.left_joins(:votes).group("topics.id").order("count(topics.id) DESC") 
   end
-  
 end
