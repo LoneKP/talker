@@ -9,7 +9,7 @@
         <% elsif talk.state == 3 %>
         Vote on the topics you think are best
         <% elsif talk.state == 4 %>
-        Now it's time to talk!
+        Here's a topic to discuss!
         <% elsif talk.state == 5 %>
         Here's a recap of what you did
         <% end %>
@@ -22,7 +22,6 @@
       <% elsif talk.state == 3 %>  
         <%= render "votes/show" %>
       <% elsif talk.state == 4 %>  
-        <%= render "talks/talking" %>
       <% elsif talk.state == 5 %>  
         <%= render "talks/recap", talk: talk %>
       <% end %>

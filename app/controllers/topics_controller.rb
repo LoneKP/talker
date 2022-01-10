@@ -1,5 +1,6 @@
 class TopicsController < ApplicationController
   before_action :set_talk
+  before_action :set_topic, only: :update
   skip_before_action :verify_authenticity_token
 
   def create
@@ -19,6 +20,11 @@ class TopicsController < ApplicationController
     Topic.find(params[:topic_id]).votes.create!
   end
 
+  def update
+   @topic.toggle(:done)
+   @topic.save
+  end
+
   private 
   def topic_params
     params.required(:topic).permit(:content)
@@ -26,5 +32,9 @@ class TopicsController < ApplicationController
 
   def set_talk
     @talk = Talk.find(params[:talk_id])
+  end
+
+  def set_topic
+    @topic = Topic.find(params[:id])
   end
 end

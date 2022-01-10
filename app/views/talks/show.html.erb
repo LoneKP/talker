@@ -1,6 +1,7 @@
 <%= turbo_stream_from "topics_stream" %>
 <%= turbo_stream_from "topic_count_stream" %>
 <%= turbo_stream_from "state_stream" %>
+<%= turbo_stream_from "vote_count_stream" %>
 
 <%= render "shared/dev_nav" if Rails.env.development? %>
 <div id=<%= dom_id(@talk) %>>

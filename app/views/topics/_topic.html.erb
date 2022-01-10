@@ -1,23 +1,38 @@
-<%= turbo_stream_from "vote_count_stream" %>
-
-<% if talk.state == 3 %>
-
-<%= button_to talk_topic_upvote_path(talk, topic), data: { turbo: false }, id: dom_id(topic), method: :post, class: "w-full bg-white p-6 flex flex-row justify-between" do %>
-  <p><%= topic.content %></p>
-  <p id="<%= dom_id(topic, :votes_count) %>"><%= topic.votes.size %> </p>
-<% end %>
+<% if talk.state == 1 %>
 
 <% elsif talk.state == 2 %>
 
+  <div id="<%= dom_id(topic) %>" class="w-full bg-white p-6 flex flex-row justify-between">
+    <%= topic.content %>
+  </div>
+
+
+<% elsif talk.state == 3 %>
+
+  <%= button_to talk_topic_upvote_path(talk, topic), data: { turbo: false }, id: dom_id(topic), method: :post, class: "w-full bg-white p-6 flex flex-row justify-between" do %>
+    <p><%= topic.content %></p>
+    <p id="<%= dom_id(topic, :votes_count) %>"><%= topic.votes.size %> </p>
+  <% end %>
+
+<% elsif talk.state == 4 %>
+
+  <% if topic.current %>
+
+    <div class="bg-emerald-400 p-4">
+      <div class="bg-emerald-400 text-white italic leading-loose font-semibold px-16 py-32 text-2xl border-8 border-double border-white">
+        <%= topic.content %>
+      </div>
+    </div>
+
+    <p class="text-right">Topic number <%= topic_counter + 1 %> / <%= topics.size %></p>
+
+  <% end %>
+
+<% elsif talk.state == 5 %>
+
 <div id="<%= dom_id(topic) %>" class="w-full bg-white p-6 flex flex-row justify-between">
   <%= topic.content %>
-</div>
-
-<% else %>
-
-<div id="<%= dom_id(topic) %>" class="w-full bg-white p-6 flex flex-row justify-between">
-  <%= topic.content %>
-   <p id="<%= dom_id(topic, :votes_count) %>"><%= topic.votes.size %> </p>
+   <span class="material-icons text-emerald-400"><%="check_circle" if topic.done?%></span>
 </div>
 
 <% end %>

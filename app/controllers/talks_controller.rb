@@ -1,5 +1,5 @@
 class TalksController < ApplicationController
-  before_action :set_talk, only: %i[ show edit update destroy ]
+  before_action :set_talk, only: %i[ show edit update destroy update_current_topic ]
   skip_before_action :verify_authenticity_token
  
   # GET /talks/1 or /talks/1.json
@@ -33,6 +33,9 @@ class TalksController < ApplicationController
   # PATCH/PUT /talks/1 or /talks/1.json
   def update
     if @talk.update(talk_params)
+      if @talk.state == 4
+        @talk.moderator.set_first_topic if @talk.moderator.there_is_no_current_topic?
+      end
       #Page change is streamed from talk.rb
     else
       render "talks/show", status: :unprocessable_entity
@@ -50,10 +53,16 @@ class TalksController < ApplicationController
     end
   end
 
+  def update_current_topic
+    @talk.moderator.set_current_topic
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_talk
-      @talk = Talk.find(params[:id])
+      if talk_id = params[:id] || params[:talk_id]
+        @talk = Talk.find(talk_id)
+      end
     end
 
     # Only allow a list of trusted parameters through.
