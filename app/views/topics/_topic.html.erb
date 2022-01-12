@@ -24,7 +24,15 @@
       </div>
     </div>
 
-    <p class="text-right">Topic number <%= topic_counter + 1 %> / <%= topics.size %></p>
+    <div class="flex flex-row gap-2 justify-between">
+      <%= button_to talk_update_current_topic_path(talk, "back"), params: { direction: "back"}, data: { turbo: false }, class: "" do |form| %>
+        <span class="material-icons">west</span>
+      <% end %>
+      <p>Topic <%= topic_counter + 1 %> of <%= topics.size %></p>
+      <%= button_to talk_update_current_topic_path(talk), params: { direction: "next" }, data: { turbo: false }, class: "" do |form| %>
+        <span class="material-icons">east</span>
+      <% end %>
+    </div>
 
   <% end %>
 

@@ -54,7 +54,11 @@ class TalksController < ApplicationController
   end
 
   def update_current_topic
-    @talk.moderator.set_current_topic
+    if params[:direction] == "next"
+      @talk.moderator.set_next_topic
+    elsif params[:direction] == "back"
+      @talk.moderator.set_previous_topic
+    end
   end
 
   private
