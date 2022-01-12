@@ -22,26 +22,27 @@
       </div>
 
     <div class="bg-sky-700 mt-2 w-full">
-      <% if talk.state == 2 %>
-        <div class="flex flex-row justify-between bg-white w-full">
-          <%= render "shared/nav_form", talk: talk, state: 1, text: "Back", class: "font-bold uppercase" %>
-          <%= render "shared/nav_form", talk: talk, state: 3, text: "next", class: "font-bold uppercase" %>
-        </div>
-      <% elsif talk.state == 3 %>
-        <div class="flex flex-row  justify-between bg-white w-full">
-          <%= render "shared/nav_form", talk: talk, state: 2, text: "Back", class: "font-bold uppercase" %>
-          <%= render "shared/nav_form", talk: talk, state: 4, text: "next", class: "font-bold uppercase" %>
-        </div>
-      <% elsif talk.state == 4 %>
-        <div class="flex flex-row justify-between bg-white w-full">
-          <%= render "shared/nav_form", talk: talk, state: 3, text: "Back", class: "font-bold uppercase" %>
-          <%= render "shared/nav_form", talk: talk, state: 5, text: "next", class: "font-bold uppercase" %>
-        </div>
-      <% elsif talk.state == 5 %>
-        <div class="flex flex-col bg-white gap-8">
-          <%= render "shared/nav_form", talk: talk, state: 4, text: "Back", class: "font-bold uppercase" %>
-          <%= link_to "Create new talk", new_talk_path, data: { turbo: false }, class: "transition duration-200 ease-in-out transform hover:bg-emerald-500 active:bg-emerald-600 bg-emerald-400 uppercase text-lg font-medium py-2 text-center bg-sky-700" %>
-        </div>
+      <% case talk.state %>
+        <% when 2 %>
+          <div class="flex flex-row justify-between bg-white w-full">
+            <%= render "shared/nav_form", talk: talk, state: 1, text: "Back", class: "font-bold uppercase" %>
+            <%= render "shared/nav_form", talk: talk, state: 3, text: "next", class: "font-bold uppercase" %>
+          </div>
+        <% when 3 %>
+          <div class="flex flex-row  justify-between bg-white w-full">
+            <%= render "shared/nav_form", talk: talk, state: 2, text: "Back", class: "font-bold uppercase" %>
+            <%= render "shared/nav_form", talk: talk, state: 4, text: "next", class: "font-bold uppercase" %>
+          </div>
+        <% when 4 %>
+          <div class="flex flex-row justify-between bg-white w-full">
+            <%= render "shared/nav_form", talk: talk, state: 3, text: "Back", class: "font-bold uppercase" %>
+            <%= render "shared/nav_form", talk: talk, state: 5, text: "next", class: "font-bold uppercase" %>
+          </div>
+        <% when 5 %>
+          <div class="flex flex-col bg-white gap-8">
+            <%= render "shared/nav_form", talk: talk, state: 4, text: "Back", class: "font-bold uppercase" %>
+            <%= link_to "Create new talk", new_talk_path, data: { turbo: false }, class: "transition duration-200 ease-in-out transform hover:bg-emerald-500 active:bg-emerald-600 bg-emerald-400 uppercase text-lg font-medium py-2 text-center bg-sky-700" %>
+          </div>
       <% end %>
     </div>
   </div>
