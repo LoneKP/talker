@@ -15,7 +15,7 @@ class Talk::Moderator
   end
 
   def set_first_topic
-    talk.highest_voted_topic.update(current: true)
+    talk.highest_voted_topic.update(current: true) unless there_are_no_topics
   end
 
   def there_is_no_current_topic?
@@ -23,6 +23,10 @@ class Talk::Moderator
   end
 
   private
+
+  def there_are_no_topics
+    talk.highest_voted_topic.nil?
+  end
 
   def previous_topic
     talk.topics_by_votes[current_topic_index - 1]
@@ -51,5 +55,4 @@ class Talk::Moderator
   end
 
   attr_reader :talk
-
 end
