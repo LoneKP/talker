@@ -3,6 +3,7 @@ class Topic < ApplicationRecord
   has_many :votes, dependent: :destroy
 
   validates :content, presence: { message: "Oops! Looks like you forgot to write a topic"}
+  validates :content, length: { maximum: 1000, too_long: "Are you sure the other participants want to read a novel? Try shortening your topic a bit"}
 
   after_create_commit { broadcast_prepend_later_to "topics_stream", locals: { talk: self.talk} }
 
