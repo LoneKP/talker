@@ -1,14 +1,28 @@
 <div class="flex-row flex bg-white my-shadow-lg mx-auto py-12 px-16 text-left mt-12"> 
 <div class="flex flex-col w-full ">
-  <p class="pb-8 text-4xl font-bold uppercase">Let's start with your name</p>
-    <%= form_with model: @talk, data: { turbo: false }, class: "flex flex-col" do |form| %>
-
-    <div class="flex flex-row justify-between items-baseline mb-2">
-      <%= form.label "Your name", class: "italic text-2xl font-bold leading-none uppercase" %>
-      <p class="opacity-50 text-black italic font-semibold">Let the participants know who you are</p>
+  <p class="pb-8 text-4xl font-bold uppercase">Let's start with a bit of information!</p>
+    <%= form_with model: @talk, data: { turbo: false }, class: "flex flex-col gap-8" do |form| %>
+    <div>
+      <div class="flex flex-row justify-between items-baseline mb-2">
+        <%= form.label "Theme", class: "italic text-2xl font-bold leading-none uppercase" %>
+        <p class="opacity-50 text-black italic font-semibold">What is the overall theme of this talk?</p>
+      </div>
+      <%= form.text_field :theme, class: "#{@talk&.errors&.any? ? "border-2 border-red-700 border-solid " : "border-solid border-2 border-black " }focus:outline-none h-12 italic font-bold px-4 w-full", autocomplete: "off" %>
     </div>
-
-    <%= form.text_field :host, class: "#{@talk&.errors&.any? ? "border-2 border-red-700 border-solid " : "border-solid border-2 border-black " }focus:outline-none h-12 italic font-bold px-4 w-full", autocomplete: "off" %>
+    <div>
+      <div class="flex flex-row justify-between items-baseline mb-2">
+        <%= form.label "Your name", class: "italic text-2xl font-bold leading-none uppercase" %>
+        <p class="opacity-50 text-black italic font-semibold">Let the participants know who you are</p>
+      </div>
+      <%= form.text_field :host, class: "#{@talk&.errors&.any? ? "border-2 border-red-700 border-solid " : "border-solid border-2 border-black " }focus:outline-none h-12 italic font-bold px-4 w-full", autocomplete: "off" %>
+    </div>
+    <div>
+      <div class="flex flex-row justify-between items-baseline mb-2">
+        <%= form.label "Time available", class: "italic text-2xl font-bold leading-none uppercase" %>
+        <p class="opacity-50 text-black italic font-semibold">How long do you have for the session?</p>
+      </div>
+      <%= form.text_field :duration, class: "#{@talk&.errors&.any? ? "border-2 border-red-700 border-solid " : "border-solid border-2 border-black " }focus:outline-none h-12 italic font-bold px-4 w-full", autocomplete: "off" %>
+    </div>
 
 </div>
 
