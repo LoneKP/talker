@@ -4,7 +4,8 @@
       <h1 class="bg-sky-700 text-white text-5xl font-bold p-3 px-2 uppercase">
         <% case talk.state %>
           <% when 1 %>
-          Hi <%= talk.host %>! Ready to have a great talk?
+          <p>Hi <%= talk.host %>!</p>
+          <p>Ready to have a great talk about <%= talk.theme %></p>
           <% when 2 %>
           Come up with some topics for the talk!
           <% when 3 %>

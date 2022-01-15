@@ -7,21 +7,22 @@
         <%= form.label "Theme", class: "italic text-2xl font-bold leading-none uppercase" %>
         <p class="opacity-50 text-black italic font-semibold">What is the overall theme of this talk?</p>
       </div>
-      <%= form.text_field :theme, class: "#{@talk&.errors&.any? ? "border-2 border-red-700 border-solid " : "border-solid border-2 border-black " }focus:outline-none h-12 italic font-bold px-4 w-full", autocomplete: "off" %>
+      <%= form.text_field :theme, class: "#{@talk&.errors&.include?(:theme) ? "border-2 border-red-700 border-solid " : "border-solid border-2 border-black " }focus:outline-none h-12 italic font-bold px-4 w-full", autocomplete: "off" %>
     </div>
     <div>
       <div class="flex flex-row justify-between items-baseline mb-2">
         <%= form.label "Your name", class: "italic text-2xl font-bold leading-none uppercase" %>
         <p class="opacity-50 text-black italic font-semibold">Let the participants know who you are</p>
       </div>
-      <%= form.text_field :host, class: "#{@talk&.errors&.any? ? "border-2 border-red-700 border-solid " : "border-solid border-2 border-black " }focus:outline-none h-12 italic font-bold px-4 w-full", autocomplete: "off" %>
+      <%= form.text_field :host, class: "#{@talk&.errors&.include?(:host) ? "border-2 border-red-700 border-solid " : "border-solid border-2 border-black " }focus:outline-none h-12 italic font-bold px-4 w-full", autocomplete: "off" %>
     </div>
     <div>
       <div class="flex flex-row justify-between items-baseline mb-2">
         <%= form.label "Time available", class: "italic text-2xl font-bold leading-none uppercase" %>
         <p class="opacity-50 text-black italic font-semibold">How long do you have for the session?</p>
       </div>
-      <%= form.text_field :duration, class: "#{@talk&.errors&.any? ? "border-2 border-red-700 border-solid " : "border-solid border-2 border-black " }focus:outline-none h-12 italic font-bold px-4 w-full", autocomplete: "off" %>
+      <%= form.text_field :duration, class: "#{@talk&.errors&.include?(:duration) ? "border-2 border-red-700 border-solid " : "border-solid border-2 border-black " }focus:outline-none h-12 italic font-bold px-4 w-full", autocomplete: "off" %>
+      <p>You'll have time for ~ <%= @talk.time_for_amount_of_topics %> topics</p>
     </div>
 
 </div>
