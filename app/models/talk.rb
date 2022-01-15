@@ -3,7 +3,9 @@ class Talk < ApplicationRecord
 
   has_many :topics, dependent: :destroy
 
-  validates :host, presence: { message: "Don't be shy! Write your name to let the participants know who you are."}
+  validates :host, presence: { message: "Don't be shy! Write your name to let the participants know who you are"}
+  validates :theme, presence: { message: "You forgot to write a theme"}
+  validates :duration, presence: { message: "How long time do you plan to spend?"}
 
   after_commit :broadcast_content, if: :saved_change_to_state?
 
