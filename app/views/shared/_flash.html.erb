@@ -2,15 +2,7 @@
   <div data-controller="flash" class="<%= classes_for_flash(key) %> w-full fixed flex justify-between bottom-0 text-md p-2">
     <div class="flex gap-2">
       <span class="material-icons"><%= icons_for_flash(key) %></span>
-      <% if key.to_sym == :error %>
-        <p> <%= "Some things to fix:" if value.count > 1 %> </p>
-        <% value.each_with_index do |error_message, index| %>
-          <p><%= "#{index + 1}) " if value.count > 1 %> <%= error_message[0] %></p>
-        <% end %>
-      <% else %>
-        <%= value %>
-      <% end %>
-      
+      <%= value %>  
     </div>
     <button type="button" data-action="flash#dismiss">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -25,7 +25,6 @@ class TalksController < ApplicationController
         format.html { redirect_to talk_url(@talk), notice: "Wonderful. Let's get started!" }
       else
         format.html { render :new, status: :unprocessable_entity }
-        flash.now[:error] = @talk.errors.messages.values
       end
     end
   end
