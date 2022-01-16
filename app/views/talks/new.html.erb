@@ -18,14 +18,15 @@
       <%= form.text_field :host, class: "#{@talk&.errors&.include?(:host) ? "border-2 border-red-700 border-solid " : "border-solid border-2 border-black " }focus:outline-none h-12 italic font-bold px-4 w-full", autocomplete: "off" %>
       <%= render "shared/error_message", attribute: :host, object: @talk %>
     </div>
-    <div>
+    <div data-controller="duration">
       <div class="flex flex-row justify-between items-baseline mb-2">
         <%= form.label "Time available", class: "italic text-2xl font-bold leading-none uppercase" %>
         <p class="opacity-50 text-black italic font-semibold">How long do you have for the session?</p>
       </div>
-      <%= form.text_field :duration, class: "#{@talk&.errors&.include?(:duration) ? "border-2 border-red-700 border-solid " : "border-solid border-2 border-black " }focus:outline-none h-12 italic font-bold px-4 w-full", autocomplete: "off" %>
+      <%= form.select :duration, [ ["15 minutes", 15], ["30 minutes", 30], ["45 minutes", 45], ["60 minutes", 60], ["75 minutes", 75], ["90 minutes", 90] ], {:selected => 60}, data: { action: "duration#showDuration", duration_target: "getSelectedDuration" }, class: "#{@talk&.errors&.include?(:duration) ? "border-2 border-red-700 border-solid " : "border-solid border-2 border-black " } w-full focus:outline-none text-lg h-12 italic font-bold px-4" %>
+
       <%= render "shared/error_message", attribute: :duration, object: @talk %>
-      <p>You'll have time for ~ <%= @talk.time_for_amount_of_topics %> topics</p>
+      <p>You'll have time for ~ <span data-duration-target="showSelectedDuration">6</span> topics</p>
     </div>
 
 </div>

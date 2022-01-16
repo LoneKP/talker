@@ -5,7 +5,9 @@ class Talk < ApplicationRecord
 
   validates :host, presence: { message: "Don't be shy! Write your name to let the participants know who you are"}
   validates :theme, presence: { message: "Write an overall theme of the talk"}
+  
   validates :duration, presence: { message: "How long time do you plan to spend?"}
+  validates :duration, numericality: { only_integer: true, message: "How long time do you plan to spend in minutes?" }
 
   after_commit :broadcast_content, if: :saved_change_to_state?
 
@@ -37,22 +39,6 @@ class Talk < ApplicationRecord
 
   def all_topics_are_done?
     !topics.where(done:false).any? && topics.size > 0
-  end
-
-  def time_for_amount_of_topics
-    return 0 if duration.nil?
-
-    (duration - intro_duration)/per_topic_duration 
-  end
-
-  private
-
-  def per_topic_duration
-    8
-  end
-
-  def intro_duration
-    10
   end
 
 end
