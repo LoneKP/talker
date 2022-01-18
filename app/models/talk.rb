@@ -1,4 +1,6 @@
 class Talk < ApplicationRecord
+  self.implicit_order_column = "created_at"
+  
   include Moderated
 
   has_many :topics, dependent: :destroy
