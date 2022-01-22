@@ -11,8 +11,9 @@ class Talk < ApplicationRecord
   validates :duration, presence: { message: "How long time do you plan to spend?"}
   validates :duration, numericality: { only_integer: true, message: "How long time do you plan to spend in minutes?" }
 
-  after_commit :broadcast_content, if: :saved_change_to_state?
-
+  after_update_commit :broadcast_content
+  
+  after_update_commit :set_first_topic, if: :state_is_4_and_there_is_no_current_topic?
 
   def broadcast_content
     broadcast_replace_later_to "state_stream", target: ActionView::RecordIdentifier.dom_id(self), partial: "talks/partial_show", 
@@ -43,4 +44,13 @@ class Talk < ApplicationRecord
     !topics.where(done:false).any? && topics.size > 0
   end
 
+  private
+
+  def state_is_4_and_there_is_no_current_topic?
+    moderator.there_is_no_current_topic? && state == 4
+  end
+
+  def set_first_topic
+    moderator.set_first_topic
+  end
 end

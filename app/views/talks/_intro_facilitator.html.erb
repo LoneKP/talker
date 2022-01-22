@@ -1,0 +1,68 @@
+<div class="bg-white my-8 p-8 my-shadow">
+  <div class="flex flex-row gap-8 overflow-hidden justify-center">
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+    <span class="material-icons text-orange-50">circle</span>
+  </div>
+  <div class="flex flex-col items-center py-16 font-light leading-loose">
+    <p>No one is here yet</p>
+    <p>Let's invite some!</p>
+  </div>
+</div>
+
+<div class="flex flex-row justify-between">
+
+  <%= link_to edit_talk_path(talk), data: { turbo: false }, class: "flex items-center w-1/6 px-8 bg-white text-sky-800 font-medium my-shadow transition duration-200 ease-in-out transform hover:bg-gray-200 active:bg-gray-400" do %>
+    <div class="flex flex-row w-full justify-between uppercase font-bold">
+      <span class="material-icons">arrow_back_ios</span>
+      <p>Edit</p>
+      <p></p>
+    </div>
+  <% end %>
+
+  <div class="flex flex-row justify-between gap-8">
+    <div data-controller="clipboard" data-action="click->clipboard#copy click->clipboard#copiedFromButton" class="transition duration-200 ease-in-out transform hover:bg-gray-200 active:bg-gray-400 md:py-4 lg:py-0 bg-white border-4 border-solid border-sky-800 tooltip cursor-pointer">
+      <p data-clipboard-target="copiedButtonElement" class="px-8 text-sky-800 md:text-6xl lg:text-xl font-medium py-2 text-center">Invite link</p>
+    </div>
+
+    <%= form_with model: talk, method: :patch, data: { turbo: false }, class: "flex flex-row" do |form| %>
+      <%= form.hidden_field :state, :value => 2 %>
+      <%= button_tag "Start session", class: "transition duration-200 ease-in-out transform hover:bg-sky-900 active:bg-sky-800 bg-sky-700 cursor-pointer text-white w-full" do %>
+            <p class="text-xl font-medium py-2 text-center uppercase px-16">Start session</p>
+      <% end %>
+    <% end %>
+  </div>
+
+</div>
+

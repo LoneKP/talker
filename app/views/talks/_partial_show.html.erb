@@ -1,25 +1,28 @@
-<div id=<%= dom_id(talk) %>>
+<div data-controller="facilitator" id=<%= dom_id(talk) %>>
   <div class="flex flex-row justify-between gap-12 mt-8">
     <div class="w-full" >
-      <h1 class="bg-sky-700 text-white text-5xl font-bold p-3 px-2 uppercase">
         <% case talk.state %>
           <% when 1 %>
-          <p>Hi <%= talk.host %>!</p>
-          <p>Ready to have a great talk about <%= talk.theme %></p>
+          <%= render "talks/title", talk: talk, text: talk.theme %>
           <% when 2 %>
-          Come up with some topics for the talk!
+          <%= render "talks/title", talk: talk, text: "Come up with some topics for the talk" %>
           <% when 3 %>
-          Vote on the topics you think are best
+          <%= render "talks/title", talk: talk, text: "Vote on the topics you think are best" %>
           <% when 4 %>
-          Here's a topic to discuss!
+          <%= render "talks/title", talk: talk, text: "Here's a topic to discuss" %>
           <% when  5 %>
-          Here's a recap of what you did
+          <%= render "talks/title", talk: talk, text: "Here's a recap of what you did" %>
         <% end %>
       </h1>
       <div class="mt-4">
       <% case talk.state %>
         <% when 1 %>
-        <%= render "talks/intro", talk: talk %>
+        <div data-facilitator-target="viewAsFacilitator" class="hidden">
+          <%= render "talks/intro_facilitator", talk: talk %>
+        </div>
+        <div data-facilitator-target="viewAsParticipant" class="hidden">
+          <%= render "talks/intro_participant", talk: talk %>
+        </div>
         <% when 2 %>
           <%= render "topics/new", talk: talk %>
         <% when 3 %>  
