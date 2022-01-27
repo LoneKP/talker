@@ -10,11 +10,14 @@ Rails.application.routes.draw do
 
   get "/talks/:id/topics", to: redirect("/talks/%{id}")
   get "/talks", to: redirect("/talks/new")
+  get "/talks/:id/current_visitor", to: "visitors#current_visitor", as: :current_visitor
   
   resources :talks do
       post :update_current_topic
     resources :topics, only: [:create, :index, :update] do
       post :upvote
+    end
+    resources :visitors, only: [:new, :create] do
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

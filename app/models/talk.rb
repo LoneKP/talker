@@ -4,8 +4,12 @@ class Talk < ApplicationRecord
   include Moderated
 
   has_many :topics, dependent: :destroy
+  
+  has_many :participations, dependent: :destroy
+  has_many :visitors, -> { distinct }, through: :participations
 
-  validates :host, presence: { message: "Don't be shy! Write your name to let the participants know who you are"}
+  accepts_nested_attributes_for :visitors
+
   validates :theme, presence: { message: "Write an overall theme of the talk"}
   
   validates :duration, presence: { message: "How long time do you plan to spend?"}
@@ -42,6 +46,10 @@ class Talk < ApplicationRecord
 
   def all_topics_are_done?
     !topics.where(done:false).any? && topics.size > 0
+  end
+
+  def facilitator
+    participations.find_by(facilitator:true).visitor
   end
 
   private

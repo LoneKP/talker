@@ -1,27 +1,24 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["viewAsFacilitator", "viewAsParticipant"]
+  static targets = ["Facilitator", "Participant"]
+  static values = { url: String }
+
 
   initialize() {
-    if (this.isFacilitator()) {
-      this.viewAsFacilitatorTargets.forEach(element => element.classList.remove("hidden"));
-    }
-    else {
-      this.viewAsParticipantTargets.forEach(element => element.classList.remove("hidden"));
-    }
+    this.evaluateRoles()
   }
 
-  isFacilitator() {
-    return this.showCookie("facilitator_id") === this.showCookie("visitor_id")
-  }
-
-  showCookie(name) {
-    if (typeof document.cookie.split("; ").find(row => row.startsWith(name)) !== "undefined") {
-      return document.cookie.split('; ').find(row => row.startsWith(name)).split('=')[1];
-    }
-    else {
-      return "there is no such cookie"
-    }
+  evaluateRoles() {
+    fetch(this.urlValue)
+    .then(response => response.json())
+    .then((visitor) => {
+      if (visitor.facilitator === true) {
+        this.FacilitatorTargets.forEach(element => element.classList.remove("hidden"));
+      } else {
+        this.ParticipantTargets.forEach(element => element.classList.remove("hidden"));
+      }
+      console.log(this.FacilitatorTargets)
+    });
   }
 }

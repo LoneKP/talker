@@ -12,6 +12,7 @@
   
   <body class="bg-orange-50 font-mono">
     <div class="flex-col mx-auto lg:max-w-screen-xl">
+    <p>current visitor: <%= Current.visitor&.id %> | name: <%= Current.visitor&.name %> | Facilitator? <%= Current.visitor&.facilitator?(@talk) if Rails.env.development? %></p>
       <%= yield %>
     </div>
     <%= render partial: "shared/flash" %>

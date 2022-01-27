@@ -1,5 +1,6 @@
 class TopicsController < ApplicationController
-  before_action :set_talk
+  include TalkScoped
+
   before_action :set_topic, only: :update
   skip_before_action :verify_authenticity_token
 
@@ -28,10 +29,6 @@ class TopicsController < ApplicationController
   private 
   def topic_params
     params.required(:topic).permit(:content)
-  end
-
-  def set_talk
-    @talk = Talk.find(params[:talk_id])
   end
 
   def set_topic

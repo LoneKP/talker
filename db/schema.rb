@@ -10,17 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_15_202426) do
+ActiveRecord::Schema.define(version: 2022_01_23_102444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
+  create_table "participations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.boolean "facilitator", default: false
+    t.uuid "visitor_id"
+    t.uuid "talk_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["talk_id"], name: "index_participations_on_talk_id"
+    t.index ["visitor_id"], name: "index_participations_on_visitor_id"
+  end
+
   create_table "talks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "duration", default: 60
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "host"
     t.integer "state", default: 1
     t.string "theme"
   end
@@ -35,6 +44,12 @@ ActiveRecord::Schema.define(version: 2022_01_15_202426) do
     t.index ["talk_id"], name: "index_topics_on_talk_id"
   end
 
+  create_table "visitors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "votes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "topic_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -42,6 +57,8 @@ ActiveRecord::Schema.define(version: 2022_01_15_202426) do
     t.index ["topic_id"], name: "index_votes_on_topic_id"
   end
 
+  add_foreign_key "participations", "talks"
+  add_foreign_key "participations", "visitors"
   add_foreign_key "topics", "talks"
   add_foreign_key "votes", "topics"
 end

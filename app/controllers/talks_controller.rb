@@ -1,7 +1,9 @@
 class TalksController < ApplicationController
-  before_action :set_talk, only: %i[ show edit update destroy update_current_topic ]
-  before_action :set_visitor_id, only: %i[ create show ]
+  include TalkScoped
+
   skip_before_action :verify_authenticity_token
+ 
+  before_action :require_visitor_registrated!, only: :show
  
   # GET /talks/1 or /talks/1.json
   def show
@@ -18,14 +20,18 @@ class TalksController < ApplicationController
   # GET /talks/new
   def new
     @talk = Talk.new
+    @visitor = Current.visitor || @talk.visitors.build
   end
 
-  # POST /talks or /talks.json
   def create
     @talk = Talk.new(talk_params)
-    cookies[:facilitator_id] = @visitor_id
+    @visitor = Visitor.find_or_initialize_by(id: visitors_params[:visitors_attributes]["0"][:id], name: visitors_params[:visitors_attributes]["0"][:name] )
     respond_to do |format|
-      if @talk.save
+      if @talk.save && @visitor.valid?
+        @talk.visitors << @visitor
+        @participation = Participation.talk_and_visitor_participation(@talk, @visitor)
+        @participation.update(facilitator:true)
+        session[:visitor_id] = @visitor.id
         format.html { redirect_to talk_url(@talk), notice: "Wonderful. Let's get started!" }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -35,7 +41,7 @@ class TalksController < ApplicationController
 
   def update
     respond_to do |format|
-      if @talk.update(talk_params)
+      if @talk.update(talk_and_visitors_params)
         format.html { redirect_to talk_url(@talk) }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -63,15 +69,16 @@ class TalksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_talk
-      if talk_id = params[:id] || params[:talk_id]
-        @talk = Talk.find(talk_id)
-      end
-    end
-
     # Only allow a list of trusted parameters through.
     def talk_params
-      params.require(:talk).permit(:duration, :host, :state, :theme)
+      params.require(:talk).permit(:duration, :state, :theme)
+      end
+    
+    def visitors_params
+      params.require(:talk).permit(visitors_attributes: [:name, :id])
+    end
+
+    def talk_and_visitors_params
+      params.require(:talk).permit(:duration, :state, :theme, visitors_attributes: [:name, :id])
     end
 end
