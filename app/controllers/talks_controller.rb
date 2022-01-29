@@ -40,6 +40,7 @@ class TalksController < ApplicationController
   end
 
   def update
+    @visitor = Visitor.find_by(id: visitors_params[:visitors_attributes]["0"][:id], name: visitors_params[:visitors_attributes]["0"][:name] )
     respond_to do |format|
       if @talk.update(talk_and_visitors_params)
         format.html { redirect_to talk_url(@talk) }
