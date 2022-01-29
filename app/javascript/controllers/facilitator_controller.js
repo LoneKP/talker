@@ -18,7 +18,6 @@ export default class extends Controller {
       } else {
         this.ParticipantTargets.forEach(element => element.classList.remove("hidden"));
       }
-      console.log(this.FacilitatorTargets)
     });
   }
 }
