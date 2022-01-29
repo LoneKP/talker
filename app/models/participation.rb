@@ -4,5 +4,5 @@ class Participation < ApplicationRecord
   belongs_to :visitor
   belongs_to :talk
 
-  scope :talk_and_visitor_participation, ->(talk, visitor) { where(talk: talk, visitor: visitor) }
+  scope :current, ->(talk, visitor) { where(talk: talk, visitor: visitor) }
 end

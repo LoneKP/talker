@@ -29,7 +29,7 @@ class TalksController < ApplicationController
     respond_to do |format|
       if @talk.save && @visitor.valid?
         @talk.visitors << @visitor
-        @participation = Participation.talk_and_visitor_participation(@talk, @visitor)
+        @participation = Participation.current(@talk, @visitor)
         @participation.update(facilitator:true)
         session[:visitor_id] = @visitor.id
         format.html { redirect_to talk_url(@talk), notice: "Wonderful. Let's get started!" }

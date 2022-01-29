@@ -23,7 +23,7 @@ class VisitorsController < ApplicationController
   end
 
   def current_visitor
-    render json: Participation.talk_and_visitor_participation(@talk, Current.visitor)[0].as_json
+    render json: Participation.current(@talk, Current.visitor)[0].as_json
   end
 
   def visitor_params
