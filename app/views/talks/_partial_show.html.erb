@@ -18,7 +18,7 @@
       <% case talk.state %>
         <% when 1 %>
         <div data-facilitator-target="Facilitator" class="hidden">
-          <%= render "talks/intro_facilitator", talk: talk %>
+          <%= render "talks/intro_facilitator", talk: talk, participants: participants %>
         </div>
         <div data-facilitator-target="Participant" class="hidden">
           <%= render "talks/intro_participant", talk: talk %>

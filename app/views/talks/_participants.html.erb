@@ -1,0 +1,5 @@
+<div id=<%= dom_id(talk, :participants) %> class="my-2 gap-2 flex-wrap flex items-start w-full">
+
+<%= (render partial: "visitors/participant", collection: participants, locals: { talk: talk }) || content_tag(:p, "No one is here yet! Invite some people", class: "text-center w-full") %>
+
+</div>

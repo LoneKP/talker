@@ -1,0 +1,4 @@
+<% colors = ["bg-emerald-400", "bg-amber-400", "bg-purple-500", "bg-orange-800", "bg-rose-800"] %>
+<div class="<%= colors[participant_counter % colors.size] %> text-white font-semibold text-lg px-8 py-2 max-w-screen-sm">
+  <p><%= participant.name %></p>
+</div>

@@ -1,13 +1,11 @@
 <div class="lg:flex lg:flex-col lg:h-screen lg:items-center">
   <div class="items-center max-w-screen-lg lg:w-full lg:my-12 2xl:mt-36">
     <div class="my-shadow-lg bg-white mx-auto py-12 px-16 text-left">
-      <!--Title-->
       <div class="flex flex-row items-center pb-8">
         <span class="text-sky-700 text-4xl material-icons-outlined">flash_on</span>
         <p class="text-4xl font-bold text-sky-700">JOIN SESSION</p>
       </div>
-      <!-- content -->
-      <%= form_with model: [ @talk, @talk.visitors.build ], method: :post do |form| %>
+      <%= form_with model: [ @talk, @talk.visitors.build ], method: :post, data: { turbo: false } do |form| %>
         <div class="flex flex-row justify-between items-baseline mb-2">
           <label class="italic text-2xl font-bold leading-none">Your name</label>
           <p class="opacity-50 text-black italic font-semibold">Let the others know who you are</p>
@@ -26,6 +24,4 @@
       </div>
     <% end %>
   </div>
-  <!--/Dialog -->
 </div>
-<!-- /Overlay -->

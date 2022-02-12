@@ -36,7 +36,7 @@
     <span class="material-icons text-orange-50">circle</span>
   </div>
   <div class="flex flex-col items-center py-16 font-light leading-loose">
-    <p>Let's invite some people!</p>
+    <%= render partial: "talks/participants", locals: { talk: talk, participants: participants }  %>
   </div>
 </div>
 

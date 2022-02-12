@@ -10,7 +10,7 @@
     <%= javascript_importmap_tags %>
   </head>
   
-  <body class="bg-orange-50 font-mono">
+  <body data-talk-id="<%= @talk&.id %>" class="bg-orange-50 font-mono">
     <div class="flex-col mx-auto lg:max-w-screen-xl">
     <% if Rails.env.development? %>
       <p>current visitor: <%= Current.visitor&.id %> | name: <%= Current.visitor&.name %> | Facilitator? <%= Current.visitor&.facilitator?(@talk) %></p>

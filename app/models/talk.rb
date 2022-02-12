@@ -21,7 +21,12 @@ class Talk < ApplicationRecord
 
   def broadcast_content
     broadcast_replace_later_to "state_stream", target: ActionView::RecordIdentifier.dom_id(self), partial: "talks/partial_show", 
-    locals: { talk: self, topics: self.ordered_topics.to_a } 
+    locals: { talk: self, topics: self.ordered_topics.to_a, participants: self.visitors.online.only_participants.to_a } 
+  end
+
+  def broadcast_participants
+    broadcast_replace_later_to "participants_stream", target: ActionView::RecordIdentifier.dom_id(self, :participants), partial: "talks/participants", 
+    locals: { talk: self, participants: self.visitors.online.only_participants.to_a } 
   end
 
   def ordered_topics

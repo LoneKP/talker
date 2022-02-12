@@ -4,7 +4,17 @@ class Visitor < ApplicationRecord
   has_many :participations
   has_many :talks, -> { distinct }, through: :participations
 
-  scope :participants, -> { joins(:participations).where(participations: { facilitator: false }) }
+  scope :only_participants, -> { joins(:participations)
+                                    .where(participations: { 
+                                        facilitator: false
+                                      }
+                                    ) 
+                                  }
+
+  def self.online
+    ids = REDIS.smembers "online"
+    where(id: ids)
+  end
   
   validates :name, presence: { message: "What is your name?" }
 

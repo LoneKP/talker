@@ -14,7 +14,9 @@ class VisitorsController < ApplicationController
     respond_to do |format|
       if @visitor.save
         session[:visitor_id] = @visitor.id
+        REDIS.sadd "online", @visitor.id
         @talk.visitors << @visitor unless @talk.visitors.exists?(@visitor.id)
+        @talk.broadcast_participants
         format.html { redirect_to talk_url(@talk) }
       else
         format.html { render :new, status: :unprocessable_entity }

@@ -2,19 +2,21 @@ class TalksController < ApplicationController
   include TalkScoped
 
   skip_before_action :verify_authenticity_token
- 
+
   before_action :require_visitor_registrated!, only: :show
  
   # GET /talks/1 or /talks/1.json
   def show
     @topics = @talk.ordered_topics
     @topic = Topic.new
+    @participants = @talk.visitors.online.only_participants
   end
 
   def index
   end
 
   def edit
+    @visitor = Current.visitor
   end
 
   # GET /talks/new
@@ -72,7 +74,7 @@ class TalksController < ApplicationController
     # Only allow a list of trusted parameters through.
     def talk_params
       params.require(:talk).permit(:duration, :state, :theme)
-      end
+    end
     
     def visitors_params
       params.require(:talk).permit(visitors_attributes: [:name, :id])
