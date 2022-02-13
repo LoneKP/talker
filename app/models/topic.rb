@@ -7,12 +7,8 @@ class Topic < ApplicationRecord
 
   validates :content, presence: { message: "Oops! Looks like you forgot to write a topic"}
   validates :content, length: { maximum: 1000, too_long: "Are you sure the other participants want to read a novel? Try shortening your topic a bit"}
-
-  after_create_commit { broadcast_prepend_later_to "topics_stream", locals: { talk: self.talk, current_visitor: Current.visitor } }
-
-  after_create_commit { broadcast_replace_later_to "topic_count_stream", target: "topics_count", partial: "topics/index", locals: { talk: self.talk, current_visitor: Current.visitor } }
   
-  after_update_commit :broadcast_content
+  after_commit :broadcast_content, on: :update
 
   after_destroy :broadcast_content
 
