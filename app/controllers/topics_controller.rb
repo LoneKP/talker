@@ -8,7 +8,7 @@ class TopicsController < ApplicationController
     @topic = @talk.topics.new topic_params
     @topics = @talk.ordered_topics
     if @topic.save
-      redirect_to @talk
+      @talk.broadcast_content
     else
       respond_to do |format|
         format.html { render "talks/show", status: :unprocessable_entity }
