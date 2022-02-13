@@ -1,9 +1,29 @@
 <% case talk.state %>
 <% when 2 %>
 
-  <div id="<%= dom_id(topic) %>" class="w-full bg-white p-6 flex flex-row justify-between">
-    <%= topic.content %>
-  </div>
+  <%= turbo_frame_tag dom_id(topic, :edit) do %>
+    <div class="hover:bg-rose-800 group flex flex-row justify-between">
+      <div class="p-6 flex flex-col w-3/4">
+        
+        <div id="<%= dom_id(topic) %>" class="pb-6 group-hover:text-white">
+          <%= topic.content %>
+        </div>
+        
+        <div>
+          <%= topic_seperator(*seperator_types.sample) %>
+        </div>
+
+      </div>
+      <div class="group-hover:flex hidden flex-row items-center relative gap-2 text-white w-1/4 justify-end -right-60 pl-4">
+
+          <%= link_to edit_talk_topic_path(talk, topic), class: "bg-rose-800 flex h-full w-full items-center justify-center my-shadow-lg", data: { turbo_frame: dom_id(topic, :edit) } do %>
+          <p class="uppercase font-semibold">edit</p>
+          <% end %>
+
+          <%= button_to "delete", talk_topic_path(talk, topic), method: :delete, class: "font-semibold uppercase", form_class: "bg-rose-800 flex h-full w-full justify-center my-shadow-lg" %>
+      </div>
+    </div>
+  <% end %>
 
 
 <% when 3 %>

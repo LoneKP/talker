@@ -1,5 +1,6 @@
 <%= form_with model: [ talk, Topic.new ], data: { turbo: false }, html: { autocomplete: "off", class: "flex flex-col w-full" } do |form| %>
   <h2 class="italic text-6xl lg:text-2xl font-bold mb-2">Add topic</h2>
   <%= form.text_area :content, size: "20x5", class: "p-2 w-full #{@topic&.errors&.any? ? "border-2 border-red-700 border-solid" : "" }" %>
+   <%= render "shared/error_message", attribute: :content, object: @topic %>
   <%= form.submit "ADD", class: "font-bold text-white bg-emerald-400 transition duration-200 ease-in-out transform hover:bg-emerald-500 active:bg-emerald-600 text-center my-2 py-2 text-xl cursor-pointer" %>
 <% end %>

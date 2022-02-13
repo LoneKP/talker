@@ -1,5 +1,8 @@
 class Topic < ApplicationRecord
+  self.implicit_order_column = "created_at"
+
   belongs_to :talk
+
   has_many :votes, dependent: :destroy
 
   validates :content, presence: { message: "Oops! Looks like you forgot to write a topic"}
@@ -8,8 +11,10 @@ class Topic < ApplicationRecord
   after_create_commit { broadcast_prepend_later_to "topics_stream", locals: { talk: self.talk, current_visitor: Current.visitor } }
 
   after_create_commit { broadcast_replace_later_to "topic_count_stream", target: "topics_count", partial: "topics/index", locals: { talk: self.talk, current_visitor: Current.visitor } }
+  
+  after_update_commit :broadcast_content
 
-  after_update_commit :broadcast_content, if: :saved_change_to_current?
+  after_destroy :broadcast_content
 
   def broadcast_content
     talk.broadcast_content

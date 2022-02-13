@@ -1,7 +1,7 @@
 class TopicsController < ApplicationController
-  include TalkScoped
+  include TalkScoped, ActionView::RecordIdentifier
 
-  before_action :set_topic, only: :update
+  before_action :set_topic, only: [:update, :edit, :destroy]
   skip_before_action :verify_authenticity_token
 
   def create
@@ -12,18 +12,35 @@ class TopicsController < ApplicationController
     else
       respond_to do |format|
         format.html { render "talks/show", status: :unprocessable_entity }
-        flash.now[:error] = @topic.errors.messages.first.second[0]
       end
     end
   end 
+
+  def edit
+  end
 
   def upvote
     Topic.find(params[:topic_id]).votes.create!
   end
 
+  def destroy
+    if @topic.destroy
+      render @talk
+    else
+      respond_to do |format|
+        format.html { render "talks/show", status: :unprocessable_entity }
+      end
+    end
+  end
+
   def update
-   @topic.toggle(:done)
-   @topic.save
+    respond_to do |format|
+      if @topic.update(topic_params)
+        format.html { redirect_to talk_url(@talk) }
+      else
+        format.html { }
+      end
+    end
   end
 
   private 

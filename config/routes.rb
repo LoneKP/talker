@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   
   resources :talks do
       post :update_current_topic
-    resources :topics, only: [:create, :index, :update] do
+    resources :topics, only: [:create, :index, :update, :edit, :destroy] do
       post :upvote
     end
     resources :visitors, only: [:new, :create] do

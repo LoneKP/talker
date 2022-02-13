@@ -1,0 +1,22 @@
+<%= turbo_frame_tag dom_id(@topic, :edit) do %>
+  <div class="bg-rose-800 group flex flex-row justify-between">
+    <div class="p-6 flex flex-col w-3/4">
+
+    <%= form_with model: [ @talk, @topic], class:"", method: :patch, id: dom_id(@topic, :edit_topic_content_form) do |form| %>
+      <%= form.text_area :content, class: "bg-white mb-6 w-full", rows: number_of_lines(@topic.content)  %>
+    <% end %>
+
+      <div>
+        <%= topic_seperator("3L82 13L92 3L102 13L112 3", "114", "#FFF") %>
+      </div>
+
+    </div>
+    <div class="flex flex-row items-center relative gap-2 text-white w-1/4 justify-end -right-60 pl-4">
+        <%= button_tag type: "submit", form: dom_id(@topic, :edit_topic_content_form), class: "bg-rose-800 flex h-full w-full items-center justify-center my-shadow-lg" do %>
+          <p class="uppercase font-semibold">update</p>
+        <% end %>
+        <%= button_to "delete", talk_topic_path(@talk, @topic), method: :delete, class: "font-semibold uppercase", form_class: "bg-rose-800 flex h-full w-full justify-center my-shadow-lg" %>
+    </div>
+  </div>
+
+<% end %>
