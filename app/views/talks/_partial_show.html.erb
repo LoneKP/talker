@@ -1,4 +1,4 @@
-<div data-facilitator-url-value="<%= current_visitor_path(talk) %>" data-controller="facilitator" id=<%= dom_id(talk) %>>
+<div data-controller="facilitator" id=<%= dom_id(talk) %>>
   <div class="flex flex-row justify-between gap-12 mt-8">
     <div class="w-full" >
         <% case talk.state %>
@@ -13,7 +13,6 @@
           <% when  5 %>
           <%= render "talks/title", talk: talk, text: "Here's a recap of what you did" %>
         <% end %>
-      </h1>
       <div class="mt-4">
       <% case talk.state %>
         <% when 1 %>
