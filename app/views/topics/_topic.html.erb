@@ -37,8 +37,8 @@
 
   <% if topic.current %>
 
-    <div class="bg-emerald-400 p-4">
-      <div class="text-center bg-emerald-400 text-white italic leading-loose font-semibold px-16 py-32 text-2xl border-8 border-double border-white">
+    <div class="bg-green p-4">
+      <div class="text-center bg-green text-white italic leading-loose font-semibold px-16 py-32 text-2xl border-8 border-double border-white">
         <%= topic.content %>
       </div>
     </div>
@@ -59,7 +59,7 @@
 
 <div id="<%= dom_id(topic) %>" class="w-full bg-white p-6 flex flex-row justify-between">
   <%= topic.content %>
-   <span class="material-icons text-emerald-400"><%="check_circle" if topic.done?%></span>
+   <span class="material-icons text-green"><%="check_circle" if topic.done?%></span>
 </div>
 
 <% end %>

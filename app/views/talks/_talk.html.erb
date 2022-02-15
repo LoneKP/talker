@@ -1,11 +1,11 @@
 <% if talk.state > 1 %>
   <div id="<%= dom_id talk %>" class="text-white flex flex-col items-center w-full lg:w-64 bg-white lg:p-6">
       <div class="flex flex-col text-white font-bold w-full">
-        <div class="bg-sky-700 flex items-end justify-around pt-16 pb-4">
+        <div class="bg-blue flex items-end justify-around pt-16 pb-4">
           <p class="uppercase italic text-lg w-1/2">Topics</p>
           <p class="text-6xl leading-none"><span id="topics_count"><%= talk.topics.count %></span></p>
         </div>
-        <div class="p-4 text-center text-sm bg-sky-700 opacity-50">
+        <div class="p-4 text-center text-sm bg-blue opacity-50">
           <% if talk.state < 3 %>
             <p>Keep them coming!</p>
           <% end %>
@@ -21,7 +21,7 @@
         </div>
       </div>
 
-    <div data-facilitator-target="Facilitator" class="bg-sky-700 mt-2 w-full hidden">
+    <div data-facilitator-target="Facilitator" class="bg-blue mt-2 w-full hidden">
       <% case talk.state %>
         <% when 2 %>
           <div class="flex flex-row justify-between bg-white w-full">
@@ -41,7 +41,7 @@
         <% when 5 %>
           <div class="flex flex-col bg-white gap-8">
             <%= render "shared/nav_form", talk: talk, state: 4, text: "Back", class: "font-bold uppercase" %>
-            <%= link_to "Create new talk", new_talk_path, data: { turbo: false }, class: "transition duration-200 ease-in-out transform hover:bg-emerald-500 active:bg-emerald-600 bg-emerald-400 uppercase text-lg font-medium py-2 text-center bg-sky-700" %>
+            <%= link_to "Create new talk", new_talk_path, data: { turbo: false }, class: "transition duration-200 ease-in-out transform hover:bg-green-dark active:bg-green-darker bg-green uppercase text-lg font-medium py-2 text-center bg-blue" %>
           </div>
       <% end %>
     </div>

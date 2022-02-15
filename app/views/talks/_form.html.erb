@@ -7,7 +7,7 @@
         <%= form.label "Theme", class: "italic text-2xl font-bold leading-none uppercase" %>
         <p class="opacity-50 text-black italic font-semibold">What is the overall theme of this talk?</p>
       </div>
-      <%= form.text_field :theme, class: "#{talk&.errors&.include?(:theme) ? "border-2 border-red-700 border-solid " : "border-solid border-2 border-black " }focus:outline-none h-12 italic font-bold px-4 w-full", autocomplete: "off" %>
+      <%= form.text_field :theme, class: "#{talk&.errors&.include?(:theme) ? "border-2 border-red border-solid " : "border-solid border-2 border-black " }focus:outline-none h-12 italic font-bold px-4 w-full", autocomplete: "off" %>
       <%= render "shared/error_message", attribute: :theme, object: talk %>
     </div>
     <div>
@@ -16,7 +16,7 @@
         <p class="opacity-50 text-black italic font-semibold">Let the participants know who you are</p>
       </div>
       <%= form.fields_for :visitors, visitor do |visitor|%>
-        <%= visitor.text_field :name, class: "#{visitor.object&.errors&.include?(:name) ? "border-2 border-red-700 border-solid " : "border-solid border-2 border-black " } focus:outline-none h-12 italic font-bold px-4 w-full", autocomplete: "off" %>
+        <%= visitor.text_field :name, class: "#{visitor.object&.errors&.include?(:name) ? "border-2 border-red border-solid " : "border-solid border-2 border-black " } focus:outline-none h-12 italic font-bold px-4 w-full", autocomplete: "off" %>
         <%= render "shared/error_message", attribute: :name, object: visitor.object %>
       <% end %>
     </div>
@@ -25,7 +25,7 @@
         <%= form.label "Time available", class: "italic text-2xl font-bold leading-none uppercase" %>
         <p class="opacity-50 text-black italic font-semibold">How long do you have for the session?</p>
       </div>
-      <%= form.select :duration, [ ["15 minutes", 15], ["30 minutes", 30], ["45 minutes", 45], ["60 minutes", 60], ["75 minutes", 75], ["90 minutes", 90] ], {:selected => 60}, data: { action: "duration#showDuration", duration_target: "getSelectedDuration" }, class: "#{talk&.errors&.include?(:duration) ? "border-2 border-red-700 border-solid " : "border-solid border-2 border-black " } w-full focus:outline-none text-lg h-12 italic font-bold px-4" %>
+      <%= form.select :duration, [ ["15 minutes", 15], ["30 minutes", 30], ["45 minutes", 45], ["60 minutes", 60], ["75 minutes", 75], ["90 minutes", 90] ], {:selected => 60}, data: { action: "duration#showDuration", duration_target: "getSelectedDuration" }, class: "#{talk&.errors&.include?(:duration) ? "border-2 border-red border-solid " : "border-solid border-2 border-black " } w-full focus:outline-none text-lg h-12 italic font-bold px-4" %>
       <%= render "shared/error_message", attribute: :duration, object: talk %>
       <p>You'll have time for ~ <span data-duration-target="showSelectedDuration">6</span> topics</p>
     </div>
@@ -41,6 +41,6 @@
       </svg>
     </div>
   <% end %>
-  <%= form.submit submit_text, method: method, class: "h-14 uppercase hvr-grow px-8 my-shadow-lg text-lg font-bold bg-sky-700 text-white active:bg-sky-900 cursor-pointer" %>
+  <%= form.submit submit_text, method: method, class: "h-14 uppercase hvr-grow px-8 my-shadow-lg text-lg font-bold bg-blue text-white active:bg-blue-darker cursor-pointer" %>
 </div>
 <% end %>

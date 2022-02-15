@@ -2,8 +2,8 @@
   <div class="items-center max-w-screen-lg lg:w-full lg:my-12 2xl:mt-36">
     <div class="my-shadow-lg bg-white mx-auto py-12 px-16 text-left">
       <div class="flex flex-row items-center pb-8">
-        <span class="text-sky-700 text-4xl material-icons-outlined">flash_on</span>
-        <p class="text-4xl font-bold text-sky-700">JOIN SESSION</p>
+        <span class="text-blue text-4xl material-icons-outlined">flash_on</span>
+        <p class="text-4xl font-bold text-blue">JOIN SESSION</p>
       </div>
       <%= form_with model: [ @talk, @talk.visitors.build ], method: :post, data: { turbo: false } do |form| %>
         <div class="flex flex-row justify-between items-baseline mb-2">
@@ -16,11 +16,11 @@
       </div>
       <div class="mt-8 flex flex-row justify-between">
         <%= link_to root_path do %>
-          <div class="flex flex-row justify-center items-center cursor-pointer hvr-grow my-shadow-lg bg-white active:bg-sky-700-gray h-14 w-14">
+          <div class="flex flex-row justify-center items-center cursor-pointer hvr-grow my-shadow-lg bg-white active:bg-blue-gray h-14 w-14">
             <span class="text-5xl material-icons">chevron_left</span>
           </div>
         <% end %>
-        <button type="submit" class="hvr-grow px-8 my-shadow-lg bg-sky-700 text-white text-lg font-bold bg-light-greeny active:bg-light-greeny-darker cursor-pointer focus:outline-none">JOIN</button>
+        <button type="submit" class="hvr-grow px-8 my-shadow-lg bg-blue text-white text-lg font-bold bg-light-greeny active:bg-light-greeny-darker cursor-pointer focus:outline-none">JOIN</button>
       </div>
     <% end %>
   </div>
